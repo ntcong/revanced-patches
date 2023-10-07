@@ -1,3 +1,10 @@
+# [2.193.0](https://github.com/ntcong/revanced-patches/compare/v2.192.0...v2.193.0) (2023-10-07)
+
+
+### Features
+
+* **inhshort:** delete ([13677f8](https://github.com/ntcong/revanced-patches/commit/13677f81358bd2c5d81cf215f458d0a335bea362))
+
 # [2.192.0](https://github.com/ReVanced/revanced-patches/compare/v2.191.0...v2.192.0) (2023-10-05)
 
 
