@@ -10,12 +10,24 @@ internal class JsonGenerator : PatchesFileGenerator {
         JsonPatch(
             it.name!!,
             it.description,
-            it.compatiblePackages,
+            it.compatiblePackages?.map { pkg ->
+                    JsonPatch.CompatiblePackage(pkg.name, pkg.versions)
+                }?.toTypedArray() ?: emptyArray(),
             it.use,
             it.requiresIntegrations,
-            it.options.values.map { option ->
-                JsonPatch.Option(option.key, option.value, option.title, option.description, option.required)
-            }
+            it.options?.map { option ->
+                    JsonPatch.Option(
+                        option.key,
+                        option.title,
+                        option.description,
+                        option.required,
+                        option.let { listOption ->
+                            if (listOption is PatchOption.ListOption<*>) {
+                                listOption.options.toMutableList().toTypedArray()
+                            } else null
+                        }
+                    )
+                }?.toTypedArray() ?: emptyArray()
         )
     }.let {
         File("patches.json").writeText(GsonBuilder().serializeNulls().create().toJson(it))
